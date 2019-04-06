@@ -13,6 +13,7 @@ struct GiaState
 {
     jobject                 m_GiaJNI;
     jmethodID               m_isInstantApp;
+    jmethodID               m_showInstallPromt;
 };
 
 GiaState g_Gia;
@@ -72,9 +73,18 @@ static int IsInstantApp(lua_State* L)
     return 1;
 }
 
+static int ShowInstallPromt(lua_State* L)
+{
+    ThreadAttacher attacher;
+    JNIEnv *env = attacher.env;
+    env->CallVoidMethod(g_Gia.m_GiaJNI, g_Gia.m_showInstallPromt);
+    return 0;
+}
+
 static const luaL_reg intantapp_methods[] =
 {
-    {"is_instant_app", IsInstantApp}
+    {"show_install_prompt", ShowInstallPromt},
+    {"is_instant_app", IsInstantApp},
     {0,0}
 };
 
@@ -97,7 +107,8 @@ static void CreateJObject()
     ClassLoader class_loader = ClassLoader(env);
     jclass cls = class_loader.load("com.agulev.instantapp.GiaJNI");
 
-    //g_Gia.m_silentLogin = env->GetMethodID(cls, "silentLogin", "()V");
+    g_Gia.m_isInstantApp = env->GetMethodID(cls, "isInstantApp", "()V");
+    g_Gia.m_showInstallPromt = env->GetMethodID(cls, "showInstallPrompt", "()V");
 
     jmethodID jni_constructor = env->GetMethodID(cls, "<init>", "(Landroid/app/Activity;)V");
     g_Gia.m_GiaJNI = env->NewGlobalRef(env->NewObject(cls, jni_constructor, dmGraphics::GetNativeAndroidActivity()));
@@ -112,6 +123,11 @@ static dmExtension::Result InitializeInstantApp(dmExtension::Params* params)
 
 static dmExtension::Result AppFinalizeInstantApp(dmExtension::AppParams* params)
 {
+    ThreadAttacher attacher;
+    JNIEnv *env = attacher.env;
+    env->DeleteGlobalRef(g_Gia.m_GiaJNI);
+    g_Gia.m_GiaJNI = NULL;
+
     return dmExtension::RESULT_OK;
 }
 

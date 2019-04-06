@@ -13,4 +13,11 @@ public class GiaJNI {
     public boolean isInstantApp() {
         return InstantApps.getPackageManagerCompat(this.activity).isInstantApp;
     }
+
+    public void showInstallPrompt() {
+        InstantApps.showInstallPrompt(this.activity,
+            postInstallIntent,
+            7,
+            "InstallApiActivity");
+    }
 }
