@@ -12,7 +12,7 @@
 struct GiaState
 {
     jobject                 m_GiaJNI;
-    jmethodID               m_silentLogin;
+    jmethodID               m_isInstantApp;
 };
 
 GiaState g_Gia;
@@ -63,8 +63,18 @@ struct ClassLoader {
     }
 };
 
+static int IsInstantApp(lua_State* L)
+{
+    ThreadAttacher attacher;
+    JNIEnv *env = attacher.env;
+    jboolean return_value = (jboolean)env->CallBooleanMethod(g_Gia.m_GiaJNI, g_Gia.m_isInstantApp);
+    lua_pushboolean(L, JNI_TRUE == return_value)
+    return 1;
+}
+
 static const luaL_reg intantapp_methods[] =
 {
+    {"is_instant_app", IsInstantApp}
     {0,0}
 };
 
@@ -96,6 +106,7 @@ static void CreateJObject()
 static dmExtension::Result InitializeInstantApp(dmExtension::Params* params)
 {
     LuaInit(params->m_L);
+    CreateJObject();
     return dmExtension::RESULT_OK;
 }
 
