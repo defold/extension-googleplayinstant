@@ -31,6 +31,7 @@ end
 
 #### `instantapp.show_install_prompt()`
 Shows a dialog that allows the user to install the current instant app.
+
 ```lua
 if instantapp.is_instant_app() then
   instantapp.show_install_prompt() -- if this is instant app then show install prompt
@@ -38,6 +39,10 @@ else
   -- regular app logic
 end
 ```
+Popup example:
+
+![2019-04-07 20 54 02](https://user-images.githubusercontent.com/2209596/55688836-b2f9a500-597d-11e9-8618-c675415983f5.jpg)
+
 
 ## Issues and suggestions
 
