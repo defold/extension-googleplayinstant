@@ -18,9 +18,6 @@ public class GiaJNI {
     public void showInstallPrompt() {
         Intent postInstallIntent = new Intent(Intent.ACTION_VIEW, this.activity.getIntent().getData());
         postInstallIntent.addCategory(Intent.CATEGORY_BROWSABLE);
-        InstantApps.showInstallPrompt(this.activity,
-            postInstallIntent,
-            7,
-            "InstallApiActivity");
+        InstantApps.showInstallPrompt(this.activity, postInstallIntent, 0, "DefoldActivity");
     }
 }
