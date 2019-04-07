@@ -10,4 +10,13 @@ height = 640
 
 [project]
 title = Google Instant App
+version = 1.1
+
+[android]
+package = com.agulev.test
+manifest = /AndroidManifest.xml
+version_code = 2
+
+[library]
+include_dirs = instantapps
 
