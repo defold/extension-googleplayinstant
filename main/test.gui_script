@@ -1,0 +1,30 @@
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	self.btn_isInstant = gui.get_node("isInstant")
+	self.btn_install = gui.get_node("install")
+
+	self.txt_result = gui.get_node("result")
+end
+
+function on_input(self, action_id, action)
+	if action_id == hash("touch") and action.released then
+		if gui.pick_node(self.btn_isInstant, action.x, action.y) then
+			if instantapp then
+				gui.set_text(self.txt_result, tostring(instantapp.is_instant_app()))
+			else
+				print("btn_isInstant")
+			end
+		elseif gui.pick_node(self.btn_install, action.x, action.y) then
+			if instantapp then
+				instantapp.show_install_prompt()
+			else
+				print("btn_install")
+			end
+		end
+	end
+end
+
+function on_reload(self)
+	-- Add input-handling code here
+	-- Remove this function if not needed
+end

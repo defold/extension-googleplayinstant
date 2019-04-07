@@ -69,7 +69,7 @@ static int IsInstantApp(lua_State* L)
     ThreadAttacher attacher;
     JNIEnv *env = attacher.env;
     jboolean return_value = (jboolean)env->CallBooleanMethod(g_Gia.m_GiaJNI, g_Gia.m_isInstantApp);
-    lua_pushboolean(L, JNI_TRUE == return_value)
+    lua_pushboolean(L, JNI_TRUE == return_value);
     return 1;
 }
 
@@ -107,7 +107,7 @@ static void CreateJObject()
     ClassLoader class_loader = ClassLoader(env);
     jclass cls = class_loader.load("com.agulev.instantapp.GiaJNI");
 
-    g_Gia.m_isInstantApp = env->GetMethodID(cls, "isInstantApp", "()V");
+    g_Gia.m_isInstantApp = env->GetMethodID(cls, "isInstantApp", "()Z");
     g_Gia.m_showInstallPromt = env->GetMethodID(cls, "showInstallPrompt", "()V");
 
     jmethodID jni_constructor = env->GetMethodID(cls, "<init>", "(Landroid/app/Activity;)V");
@@ -140,17 +140,17 @@ DM_DECLARE_EXTENSION(EXTENSION_NAME, LIB_NAME, AppInitializeInstantApp, AppFinal
 
 #else
 
-dmExtension::Result AppInitializeInstantApp(dmExtension::AppParams* params)
+dmExtension::Result InitializeInstantApp(dmExtension::Params* params)
 {
     dmLogInfo("Registered extension InstantApp (null)");
     return dmExtension::RESULT_OK;
 }
 
-dmExtension::Result AppFinalizeInstantApp(dmExtension::AppParams* params)
+dmExtension::Result FinalizeInstantApp(dmExtension::Params* params)
 {
     return dmExtension::RESULT_OK;
 }
 
-DM_DECLARE_EXTENSION(EXTENSION_NAME, LIB_NAME, AppInitializeInstantApp, AppFinalizeInstantApp, 0, 0, 0, 0)
+DM_DECLARE_EXTENSION(EXTENSION_NAME, LIB_NAME, 0,0,InitializeInstantApp, 0, 0, FinalizeInstantApp)
 
 #endif
