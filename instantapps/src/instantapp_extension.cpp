@@ -11,9 +11,10 @@
 
 struct GiaState
 {
-    jobject                 m_GiaJNI;
-    jmethodID               m_isInstantApp;
-    jmethodID               m_showInstallPrompt;
+    jobject                  m_GiaJNI;
+    jmethodID                m_isInstantApp;
+    jmethodID                m_showInstallPrompt;
+    jmethodID                m_getInstantAppCookieMaxSize;
 };
 
 GiaState g_Gia;
@@ -81,10 +82,20 @@ static int ShowInstallPrompt(lua_State* L)
     return 0;
 }
 
+static int GetInstantAppCookieMaxSize(lua_State* L)
+{
+    ThreadAttacher attacher;
+    JNIEnv *env = attacher.env;
+    jint maxSize = env->CallIntMethod(g_Gia.m_GiaJNI, g_Gia.m_getInstantAppCookieMaxSize);
+    lua_pushnumber(L, (int)maxSize);
+    return 1;
+}
+
 static const luaL_reg intantapp_methods[] =
 {
     {"show_install_prompt", ShowInstallPrompt},
     {"is_instant_app", IsInstantApp},
+    {"get_cookie_max_size", GetInstantAppCookieMaxSize},
     {0,0}
 };
 
@@ -109,6 +120,7 @@ static void CreateJObject()
 
     g_Gia.m_isInstantApp = env->GetMethodID(cls, "isInstantApp", "()Z");
     g_Gia.m_showInstallPrompt = env->GetMethodID(cls, "showInstallPrompt", "()V");
+    g_Gia.m_getInstantAppCookieMaxSize = env->GetMethodID(cls, "getInstantAppCookieMaxSize", "()I");
 
     jmethodID jni_constructor = env->GetMethodID(cls, "<init>", "(Landroid/app/Activity;)V");
     g_Gia.m_GiaJNI = env->NewGlobalRef(env->NewObject(cls, jni_constructor, dmGraphics::GetNativeAndroidActivity()));

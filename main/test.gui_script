@@ -4,6 +4,11 @@ function init(self)
 	self.btn_install = gui.get_node("install")
 
 	self.txt_result = gui.get_node("result")
+
+	if instantapp then
+		local size_node = gui.get_node("max_size")
+		gui.set_text(size_node, "get_cookie_max_size: "..instantapp.get_cookie_max_size())
+	end
 end
 
 function on_input(self, action_id, action)

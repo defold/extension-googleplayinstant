@@ -20,4 +20,8 @@ public class GiaJNI {
         postInstallIntent.addCategory(Intent.CATEGORY_BROWSABLE);
         InstantApps.showInstallPrompt(this.activity, postInstallIntent, 0, "DefoldActivity");
     }
+
+    public int getInstantAppCookieMaxSize() {
+        return InstantApps.getPackageManagerCompat(this.activity).getInstantAppCookieMaxSize();
+    }
 }
