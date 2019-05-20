@@ -29,7 +29,7 @@ if instantapp.is_instant_app() then
 end
 ```
 
-#### `instantapp.show_install_prompt()` [Original DOC](https://developers.google.com/android/reference/com/google/android/gms/instantapps/InstantApps#showInstallPrompt(android.app.Activity,%20android.content.Intent,%20int,%20java.lang.String)
+#### `instantapp.show_install_prompt()` [Original DOC](https://developers.google.com/android/reference/com/google/android/gms/instantapps/InstantApps#showInstallPrompt(android.app.Activity,%20android.content.Intent,%20int,%20java.lang.String))
 Shows a dialog that allows the user to install the current instant app.
 
 ```lua
