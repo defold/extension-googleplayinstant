@@ -21,7 +21,7 @@ if instantapp then
 end
 ```
 
-#### `instantapp.is_instant_app()`
+#### `instantapp.is_instant_app()` [Original DOC](https://developers.google.com/android/reference/com/google/android/gms/instantapps/PackageManagerCompat#isInstantApp%28%29)
 Returns true if this application is an instant app.
 ```lua
 if instantapp.is_instant_app() then
@@ -29,7 +29,7 @@ if instantapp.is_instant_app() then
 end
 ```
 
-#### `instantapp.show_install_prompt()`
+#### `instantapp.show_install_prompt()` [Original DOC](https://developers.google.com/android/reference/com/google/android/gms/instantapps/InstantApps#showInstallPrompt(android.app.Activity,%20android.content.Intent,%20int,%20java.lang.String)
 Shows a dialog that allows the user to install the current instant app.
 
 ```lua
@@ -43,6 +43,23 @@ Popup example:
 
 ![2019-04-07 20 54 02](https://user-images.githubusercontent.com/2209596/55688836-b2f9a500-597d-11e9-8618-c675415983f5.jpg)
 
+#### `instantapp.get_cookie_max_size()` [Original DOC](https://developers.google.com/android/reference/com/google/android/gms/instantapps/PackageManagerCompat.html#getInstantAppCookieMaxSize%28%29)
+Gets the maximum size in bytes of the cookie data an instant app can store on the device.
+```lua
+local cookie_size = instantapp.get_cookie_max_size() --number, for example 16384
+```
+
+#### `instantapp.get_cookie()` [Original DOC](https://developers.google.com/android/reference/com/google/android/gms/instantapps/PackageManagerCompat.html#getInstantAppCookie%28%29)
+Gets the instant application cookie for this app. Non instant apps and apps that were instant but were upgraded to normal apps can still access this API.
+```lua
+local cookie_byte_array = instantapp.get_cookie()
+```
+
+#### `instantapp.set_cookie()` [Original DOC](https://developers.google.com/android/reference/com/google/android/gms/instantapps/PackageManagerCompat.html#setInstantAppCookie%28byte%5B%5D%29)
+Sets the instant application cookie for the calling app. Non instant apps and apps that were instant but were upgraded to normal apps can still access this API.
+```lua
+instantapp.set_cookie(bytes)
+```
 
 ## Issues and suggestions
 
