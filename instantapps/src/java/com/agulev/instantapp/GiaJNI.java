@@ -24,4 +24,21 @@ public class GiaJNI {
     public int getInstantAppCookieMaxSize() {
         return InstantApps.getPackageManagerCompat(this.activity).getInstantAppCookieMaxSize();
     }
+
+    public byte[] getInstantAppCookie() {
+        if (getInstantAppCookieMaxSize() == 0) {
+            return new byte[0];
+        }
+        byte[] cookie = InstantApps.getPackageManagerCompat(this.activity).getInstantAppCookie();
+        if (cookie == null) {
+            return new byte[0];
+        }
+        return cookie;
+    }
+    
+    public void setInstantAppCookie(byte[] cookie) {
+        InstantApps.getPackageManagerCompat(this.activity).setInstantAppCookie(cookie);
+    }
+
+
 }
