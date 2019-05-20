@@ -15,6 +15,8 @@ struct GiaState
     jmethodID                m_isInstantApp;
     jmethodID                m_showInstallPrompt;
     jmethodID                m_getInstantAppCookieMaxSize;
+    jmethodID                m_getInstantAppCookie;
+    jmethodID                m_setInstantAppCookie;
 };
 
 GiaState g_Gia;
@@ -67,28 +69,89 @@ struct ClassLoader {
 
 static int IsInstantApp(lua_State* L)
 {
+    int top = lua_gettop(L);
+    
     ThreadAttacher attacher;
     JNIEnv *env = attacher.env;
     jboolean return_value = (jboolean)env->CallBooleanMethod(g_Gia.m_GiaJNI, g_Gia.m_isInstantApp);
     lua_pushboolean(L, JNI_TRUE == return_value);
+    
+    assert(top + 1 == lua_gettop(L));
+    
     return 1;
 }
 
 static int ShowInstallPrompt(lua_State* L)
 {
+    int top = lua_gettop(L);
+    
     ThreadAttacher attacher;
     JNIEnv *env = attacher.env;
     env->CallVoidMethod(g_Gia.m_GiaJNI, g_Gia.m_showInstallPrompt);
+    
+    assert(top == lua_gettop(L));
+    
     return 0;
 }
 
 static int GetInstantAppCookieMaxSize(lua_State* L)
 {
+    int top = lua_gettop(L);
+    
     ThreadAttacher attacher;
     JNIEnv *env = attacher.env;
     jint maxSize = env->CallIntMethod(g_Gia.m_GiaJNI, g_Gia.m_getInstantAppCookieMaxSize);
     lua_pushnumber(L, (int)maxSize);
+
+    assert(top + 1 == lua_gettop(L));
+    
     return 1;
+}
+
+static int GetInstantAppCookie(lua_State* L)
+{
+    int top = lua_gettop(L);
+    
+    ThreadAttacher attacher;
+    JNIEnv *env = attacher.env;
+
+    int lenght = 0;
+    jbyte* cookie = NULL;
+
+    jbyteArray cookieBArray = (jbyteArray)env->CallObjectMethod(g_Gia.m_GiaJNI, g_Gia.m_getInstantAppCookie);
+
+    if(cookieBArray != NULL)
+    {
+        lenght = env->GetArrayLength(cookieBArray);
+        cookie = env->GetByteArrayElements(cookieBArray, NULL);
+    }
+    
+    lua_pushlstring(L, (const char *)cookie, lenght);
+    
+    env->ReleaseByteArrayElements(cookieBArray, cookie, 0);
+
+    assert(top + 1 == lua_gettop(L));
+
+    return 1;
+}
+
+static int SetInstantAppCookie(lua_State* L)
+{
+    int top = lua_gettop(L);
+    
+    ThreadAttacher attacher;
+    JNIEnv *env = attacher.env;
+
+    size_t cookie_lenght;
+    const char* cookie = luaL_checklstring(L, 1, &cookie_lenght);
+
+    jbyteArray cookieBArray = env->NewByteArray(cookie_lenght);
+    env->SetByteArrayRegion(cookieBArray, 0, cookie_lenght, (jbyte*)cookie);
+    env->CallVoidMethod(g_Gia.m_GiaJNI, g_Gia.m_setInstantAppCookie, cookieBArray);
+    
+    assert(top == lua_gettop(L));
+
+    return 0;
 }
 
 static const luaL_reg intantapp_methods[] =
@@ -96,6 +159,8 @@ static const luaL_reg intantapp_methods[] =
     {"show_install_prompt", ShowInstallPrompt},
     {"is_instant_app", IsInstantApp},
     {"get_cookie_max_size", GetInstantAppCookieMaxSize},
+    {"get_cookie", GetInstantAppCookie},
+    {"set_cookie", SetInstantAppCookie},
     {0,0}
 };
 
@@ -121,6 +186,8 @@ static void CreateJObject()
     g_Gia.m_isInstantApp = env->GetMethodID(cls, "isInstantApp", "()Z");
     g_Gia.m_showInstallPrompt = env->GetMethodID(cls, "showInstallPrompt", "()V");
     g_Gia.m_getInstantAppCookieMaxSize = env->GetMethodID(cls, "getInstantAppCookieMaxSize", "()I");
+    g_Gia.m_getInstantAppCookie = env->GetMethodID(cls, "getInstantAppCookie", "()[B");
+    g_Gia.m_setInstantAppCookie = env->GetMethodID(cls, "setInstantAppCookie", "([B)V");
 
     jmethodID jni_constructor = env->GetMethodID(cls, "<init>", "(Landroid/app/Activity;)V");
     g_Gia.m_GiaJNI = env->NewGlobalRef(env->NewObject(cls, jni_constructor, dmGraphics::GetNativeAndroidActivity()));

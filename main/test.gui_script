@@ -3,7 +3,12 @@ function init(self)
 	self.btn_isInstant = gui.get_node("isInstant")
 	self.btn_install = gui.get_node("install")
 
+	self.btn_set_cookie = gui.get_node("set_cookie")
+	self.btn_get_cookie = gui.get_node("get_cookie")
+
 	self.txt_result = gui.get_node("result")
+	self.txt_cookie_result = gui.get_node("cookie_result")
+	self.txt_cookie_result1 = gui.get_node("cookie_result1")
 
 	if instantapp then
 		local size_node = gui.get_node("max_size")
@@ -24,6 +29,23 @@ function on_input(self, action_id, action)
 				instantapp.show_install_prompt()
 			else
 				print("btn_install")
+			end
+		elseif gui.pick_node(self.btn_set_cookie, action.x, action.y) then
+			if instantapp then
+				local bytes = "data:"..math.random(1,1000)
+				gui.set_text(self.txt_cookie_result1, bytes)
+				instantapp.set_cookie(bytes)
+			else
+				print("btn_set_cookie")
+				local bytes = "data:"..math.random(1,1000)
+				gui.set_text(self.txt_cookie_result1, bytes)
+			end
+		elseif gui.pick_node(self.btn_get_cookie, action.x, action.y) then
+			if instantapp then
+				local bytes = instantapp.get_cookie()
+				gui.set_text(self.txt_cookie_result, bytes)
+			else
+				print("btn_get_cookie")
 			end
 		end
 	end
