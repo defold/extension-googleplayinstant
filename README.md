@@ -8,13 +8,13 @@ This is [Native Extension](https://www.defold.com/manuals/extensions/) for the [
 
 You can use the InstantApp extension in your own project by adding this project as a [Defold library dependency](https://www.defold.com/manuals/libraries/). Open your game.project file and in the dependencies field under project add:
 
-https://github.com/AGulev/instantapp/archive/master.zip
+> https://github.com/AGulev/instantapp/archive/master.zip
 
 Or point to the ZIP file of a [specific release](https://github.com/AGulev/instantapp/releases).
 
 Starting Defold 1.2.162 this extension has one more dependency:
 
-https://github.com/defold/extension-gps/archive/master.zip
+> https://github.com/defold/extension-gps/archive/master.zip
 
 ## API
 
