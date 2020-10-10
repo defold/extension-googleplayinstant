@@ -12,10 +12,6 @@ You can use the InstantApp extension in your own project by adding this project 
 
 Or point to the ZIP file of a [specific release](https://github.com/AGulev/instantapp/releases).
 
-Starting Defold 1.2.162 this extension has one more dependency:
-
-> https://github.com/defold/extension-gps/archive/master.zip
-
 ## API
 
 If you are working on cross-platform application the best practice to check the existence of `instantapp` module, this module exists only in android bundle:
