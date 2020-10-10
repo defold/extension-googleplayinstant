@@ -8,6 +8,7 @@
         android:installLocation="auto"
         xmlns:dist="http://schemas.android.com/apk/distribution"
         android:targetSandboxVersion="2">
+    <dist:module dist:instant="true" />
 
     <uses-feature android:required="true" android:glEsVersion="0x00020000" />
     <uses-sdk android:minSdkVersion="{{android.minimum_sdk_version}}" android:targetSdkVersion="{{android.target_sdk_version}}" />
