@@ -10,8 +10,8 @@ height = 640
 
 [project]
 title = GoogleInstantApp
-version = 1.1
-dependencies = https://github.com/defold/extension-gps/archive/master.zip
+version = 1.2
+dependencies = 
 
 [android]
 package = com.agulev.test
