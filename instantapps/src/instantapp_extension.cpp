@@ -9,9 +9,12 @@
 
 #include <jni.h>
 
+namespace dmInstantApp {
+
 struct GiaState
 {
     jobject                  m_GiaJNI;
+
     jmethodID                m_isInstantApp;
     jmethodID                m_showInstallPrompt;
     jmethodID                m_getInstantAppCookieMaxSize;
@@ -164,11 +167,6 @@ static const luaL_reg intantapp_methods[] =
     {0,0}
 };
 
-static dmExtension::Result AppInitializeInstantApp(dmExtension::AppParams* params)
-{
-    return dmExtension::RESULT_OK;
-}
-
 static void LuaInit(lua_State* L)
 {
     DM_LUA_STACK_CHECK(L, 0);
@@ -193,19 +191,31 @@ static void CreateJObject()
     g_Gia.m_GiaJNI = env->NewGlobalRef(env->NewObject(cls, jni_constructor, dmGraphics::GetNativeAndroidActivity()));
 }
 
-static dmExtension::Result InitializeInstantApp(dmExtension::Params* params)
-{
-    LuaInit(params->m_L);
-    CreateJObject();
-    return dmExtension::RESULT_OK;
-}
-
-static dmExtension::Result AppFinalizeInstantApp(dmExtension::AppParams* params)
+static void RemoveJObject()
 {
     ThreadAttacher attacher;
     JNIEnv *env = attacher.env;
     env->DeleteGlobalRef(g_Gia.m_GiaJNI);
     g_Gia.m_GiaJNI = NULL;
+}
+
+} // namespace
+
+static dmExtension::Result AppInitializeInstantApp(dmExtension::AppParams* params)
+{
+    return dmExtension::RESULT_OK;
+}
+
+static dmExtension::Result InitializeInstantApp(dmExtension::Params* params)
+{
+    dmInstantApp::LuaInit(params->m_L);
+    dmInstantApp::CreateJObject();
+    return dmExtension::RESULT_OK;
+}
+
+static dmExtension::Result AppFinalizeInstantApp(dmExtension::AppParams* params)
+{
+    dmInstantApp::RemoveJObject();
 
     return dmExtension::RESULT_OK;
 }
@@ -230,6 +240,6 @@ dmExtension::Result FinalizeInstantApp(dmExtension::Params* params)
     return dmExtension::RESULT_OK;
 }
 
-DM_DECLARE_EXTENSION(EXTENSION_NAME, LIB_NAME, 0,0,InitializeInstantApp, 0, 0, FinalizeInstantApp)
+DM_DECLARE_EXTENSION(EXTENSION_NAME, LIB_NAME, 0, 0, InitializeInstantApp, 0, 0, FinalizeInstantApp)
 
 #endif

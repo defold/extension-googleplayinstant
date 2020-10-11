@@ -222,7 +222,7 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "2"
+  text: ""
   font: "system_font"
   id: "qw"
   xanchor: XANCHOR_NONE
@@ -285,7 +285,7 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "2"
+  text: ""
   font: "system_font"
   id: "max_size"
   xanchor: XANCHOR_NONE
