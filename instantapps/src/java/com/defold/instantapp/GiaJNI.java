@@ -1,4 +1,4 @@
-package com.agulev.instantapp;
+package com.defold.instantapp;
 
 import android.app.Activity;
 import com.google.android.gms.instantapps.InstantApps;

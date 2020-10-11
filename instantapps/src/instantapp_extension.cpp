@@ -179,7 +179,7 @@ static void CreateJObject()
     ThreadAttacher attacher;
     JNIEnv *env = attacher.env;
     ClassLoader class_loader = ClassLoader(env);
-    jclass cls = class_loader.load("com.agulev.instantapp.GiaJNI");
+    jclass cls = class_loader.load("com.defold.instantapp.GiaJNI");
 
     g_Gia.m_isInstantApp = env->GetMethodID(cls, "isInstantApp", "()Z");
     g_Gia.m_showInstallPrompt = env->GetMethodID(cls, "showInstallPrompt", "()V");

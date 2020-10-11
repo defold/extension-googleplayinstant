@@ -9,12 +9,12 @@ width = 960
 height = 640
 
 [project]
-title = GoogleInstantApp
-version = 1.2
+title = Defold GoogleInstantApp
+version = 2.0
 dependencies = 
 
 [android]
-package = com.agulev.test
+package = com.defold.instantapp
 manifest = /AndroidManifest.xml
 version_code = 2
 proguard = /builtins/manifests/android/dmengine.pro
