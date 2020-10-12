@@ -2,15 +2,15 @@
 
 This is [Native Extension](https://www.defold.com/manuals/extensions/) for the [Defold Game Engine](https://www.defold.com) implement [Google Play Instant](https://developer.android.com/topic/google-play-instant/overview) API methods.
 
-[Here you can find](https://forum.defold.com/t/instruction-android-instant-app-creation/48471?u=agulev) instruction how to build instant app using Defold.
+[Here you can find](https://www.defold.com/manuals/extension-google-play-instant) instruction how to build instant app using Defold.
 
 ## Setup
 
 You can use the InstantApp extension in your own project by adding this project as a [Defold library dependency](https://www.defold.com/manuals/libraries/). Open your game.project file and in the dependencies field under project add:
 
-> https://github.com/AGulev/instantapp/archive/master.zip
+> https://github.com/defold/extension-instantapp/archive/master.zip
 
-Or point to the ZIP file of a [specific release](https://github.com/AGulev/instantapp/releases).
+Or point to the ZIP file of a [specific release](https://github.com/defold/extension-instantapp/releases).
 
 ## API
 
@@ -63,4 +63,4 @@ instantapp.set_cookie(bytes)
 
 ## Issues and suggestions
 
-If you have any issues, questions or suggestions please [create an issue](https://github.com/AGulev/instantapp/issues) or contact me: me@agulev.com
+If you have any issues, questions or suggestions please [create an issue](https://github.com/defold/extension-instantapp/issues).
