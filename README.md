@@ -2,7 +2,7 @@
 
 This is [Native Extension](https://www.defold.com/manuals/extensions/) for the [Defold Game Engine](https://www.defold.com) implement [Google Play Instant](https://developer.android.com/topic/google-play-instant/overview) API methods.
 
-[Here you can find](TODO_LINK) instruction how to build instant app using Defold.
+[Here you can find](https://www.defold.com/manuals/extension-google-play-instant) instruction how to build instant app using Defold.
 
 ## Setup
 
