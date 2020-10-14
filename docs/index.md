@@ -5,7 +5,7 @@ brief: This manual explains how to create Google Play Instant game with Defold.
 
 # Google Play Instant
 
-Google Play Instant enables native games to launch on devices running Android 6.0+ without being installed.
+With Google Play Instant, people can use a game without installing it first. Use it to increase engagement or gain more installs by surfacing your instant game across the Play Store and Google Play Games app. ([official Google Play Instant docs](https://developer.android.com/topic/google-play-instant))
 
 ![GooglePlayInstant](gpi-try-now.png)
 
@@ -70,6 +70,10 @@ Even if you set different `android:targetSandboxVersion` in the installable game
 
 ## Technical Requirements
 According to the [Google Play Instant Technical Requirements](https://developer.android.com/topic/google-play-instant/game-tech-requirements) `apk` size must be less than or equal to 15 MB. Information about application size optimisation available [here](https://www.defold.com/extension-fbinstant/#reducing-bundle-size).
+
+::: sidenote
+Google Play Instant is only available to Android devices running Android OS 6.0 or higher.
+:::
 
 
 ## API Usage
