@@ -153,9 +153,9 @@ According to the [Google Play Instant Technical Requirements](https://developer.
 ![Testing Instant game](start_instant.png)
 
 1. Download Android SDK tools:
-- macOS: https://dl.google.com/android/repository/tools_r25.2.3-macosx.zip
-- Windows: https://dl.google.com/android/repository/tools_r25.2.3-windows.zip
-- Linux: https://dl.google.com/android/repository/tools_r25.2.3-linux.zip
+- macOS: [https://dl.google.com/android/repository/tools_r25.2.3-macosx.zip](https://dl.google.com/android/repository/tools_r25.2.3-macosx.zip)
+- Windows: [https://dl.google.com/android/repository/tools_r25.2.3-windows.zip](https://dl.google.com/android/repository/tools_r25.2.3-windows.zip)
+- Linux: [https://dl.google.com/android/repository/tools_r25.2.3-linux.zip](https://dl.google.com/android/repository/tools_r25.2.3-linux.zip)
 2. Unpack and copy the `tools` folder into `android-sdk` folder.
 3. Install build tools:
 
