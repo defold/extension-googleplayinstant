@@ -17,7 +17,6 @@ dependencies =
 package = com.defold.instantapp
 manifest = /AndroidManifest.xml
 version_code = 2
-proguard = /builtins/manifests/android/dmengine.pro
 
 [library]
 include_dirs = instantapps
