@@ -1,3 +1,8 @@
+repositories {
+    mavenCentral()
+}
+
 dependencies {
-	implementation "com.google.android.gms:play-services-instantapps:16.+"
+    //https://developers.google.com/android/guides/setup
+    implementation "com.google.android.gms:play-services-instantapps:18.0.1"
 }
