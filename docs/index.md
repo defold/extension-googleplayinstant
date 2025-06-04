@@ -201,6 +201,3 @@ More information about debugging on mobile devices available in the [Debugging m
 
 ## Source code
 The source code is available on [GitHub](https://github.com/defold/extension-googleplayinstant)
-
-
-## API reference
